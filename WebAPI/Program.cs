@@ -1,5 +1,6 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Repositories.EFCore;
+using WebAPI.Extensions;
 using WebAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection")));
+builder.Services.ConfigureSqlContext(builder.Configuration);
+// Yazdıgımız extension metodu uyguladık. Parametre olarak konfigürasyonu geçtik
 
 var app = builder.Build();
 
