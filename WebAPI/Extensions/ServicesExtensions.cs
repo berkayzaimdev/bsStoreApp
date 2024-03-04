@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Repositories.Contracts;
 using Repositories.EFCore;
 
 namespace WebAPI.Extensions
@@ -9,5 +10,7 @@ namespace WebAPI.Extensions
         // Hangi nesneye extension metot yazmak istiyorsak o sınıfı this ile işaretleriz.
         // Bu nesne IServiceCollection olabilir, başka bir interface de olabilir.
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) => services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
+
+        public static void ConfigureRepositoryManager(this IServiceCollection services) => services.AddScoped<IRepositoryManager, RepositoryManager>();
     }
 }

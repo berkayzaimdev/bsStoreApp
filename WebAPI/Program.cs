@@ -15,6 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.ConfigureSqlContext(builder.Configuration);
 // Yazdıgımız extension metodu uyguladık. Parametre olarak konfigürasyonu geçtik
 
+builder.Services.ConfigureRepositoryManager();
+// IoC'ye RepositoryManager'ı kaydetmek için yazdığımız extension metodu uyguladık
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
