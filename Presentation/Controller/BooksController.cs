@@ -1,10 +1,13 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
-using Repositories.Contracts;
-using Repositories.EFCore;
 using Services.Contracts;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace WebAPI.Controllers
+namespace Presentation.Controller
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -60,7 +63,7 @@ namespace WebAPI.Controllers
         public IActionResult UpdateOneBook([FromRoute(Name = "id")] int id,
             [FromBody] Book book)
         {
-            try 
+            try
             {
                 _manager
                     .BookService
@@ -68,10 +71,10 @@ namespace WebAPI.Controllers
 
                 return NoContent();
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 throw new Exception(exc.Message);
-            } 
+            }
         }
 
         [HttpDelete("{id:int}")]
@@ -83,7 +86,7 @@ namespace WebAPI.Controllers
 
                 return NoContent();
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 throw new Exception(exc.Message);
             }
