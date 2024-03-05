@@ -58,5 +58,10 @@ namespace Services
             _manager.Book.Update(entity);
             _manager.Save();
         }
+
+        public void UpdateOneBook(Book book)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

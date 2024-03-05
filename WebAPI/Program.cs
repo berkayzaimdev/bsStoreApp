@@ -18,6 +18,9 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.ConfigureRepositoryManager();
 // IoC'ye RepositoryManager'ı kaydetmek için yazdığımız extension metodu uyguladık
 
+builder.Services.ConfigureServiceManager();
+// IoC'ye ServiceManager'ı kaydetmek için yazdığımız extension metodu uyguladık
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
