@@ -1,15 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NLog;
 using Repositories.EFCore;
 using WebAPI.Extensions;
 using WebAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(),"/nlog.config"));
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -21,6 +22,9 @@ builder.Services.ConfigureRepositoryManager();
 
 builder.Services.ConfigureServiceManager();
 // IoC'ye ServiceManager'ı kaydetmek için yazdığımız extension metodu uyguladık
+
+builder.Services.ConfigureLoggerService();
+// IoC'ye LoggerManager'ı kaydet
 
 var app = builder.Build();
 
