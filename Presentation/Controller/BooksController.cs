@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controller
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/books")]
     public class BooksController : ControllerBase
     {
         private readonly IServiceManager _manager;
@@ -27,6 +27,7 @@ namespace Presentation.Controller
             return Ok(books);
         }
 
+        [HttpGet("{id:int}")]
         public IActionResult GetOneBook([FromRoute(Name = "id")] int id)
         {
             var book = _manager
