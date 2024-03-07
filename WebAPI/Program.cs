@@ -28,6 +28,9 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureLoggerService();
 // IoC'ye LoggerManager'ı kaydet
 
+builder.Services.AddAutoMapper(typeof(Program));
+// Tek satırda çağırabildiğimiz için extension olarak yazmaya gerek duymadık
+
 var app = builder.Build();
 
 var logger = app.Services.GetRequiredService<ILoggerService>();
