@@ -43,39 +43,23 @@ namespace Presentation.Controller
         [HttpPost]
         public IActionResult CreateOneBook([FromBody] Book book)
         {
-            try
-            {
-                if (book is null)
-                    return BadRequest(); // 400 
+            if (book is null)
+                return BadRequest(); // 400 
 
-                _manager
-                    .BookService
-                    .CreateOneBook(book);
+            _manager.BookService.CreateOneBook(book);
 
-                return StatusCode(201, book);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return StatusCode(201, book);
         }
 
         [HttpPut("{id:int}")]
         public IActionResult UpdateOneBook([FromRoute(Name = "id")] int id,
             [FromBody] Book book)
         {
-            try
-            {
-                _manager
-                    .BookService
-                    .UpdateOneBook(id, book, true);
+            if (book is null)
+                return BadRequest();
+            _manager.BookService.UpdateOneBook(id, book, true);
 
-                return NoContent();
-            }
-            catch (Exception exc)
-            {
-                throw new Exception(exc.Message);
-            }
+            return NoContent();
         }
 
         [HttpDelete("{id:int}")]
