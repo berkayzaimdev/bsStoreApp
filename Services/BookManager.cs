@@ -20,10 +20,12 @@ namespace Services
             _logger = logger;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<BookDto>> GetAllBooksAsync(BookParams bookParams, bool trackChanges)
+        public async Task<(IEnumerable<BookDto> books, MetaData metaData)> GetAllBooksAsync(BookParams bookParams, bool trackChanges)
         {
-            var books = await _manager.Book.GetAllBooksAsync(bookParams, trackChanges);
-            return _mapper.Map<IEnumerable<BookDto>>(books);
+            var booksWithMetaData = await _manager
+                .Book   
+                .GetAllBooksAsync(bookParams, trackChanges);
+            return (_mapper.Map<IEnumerable<BookDto>>(booksWithMetaData), booksWithMetaData.MetaData);
             // mapleme işleminde elde etmek istediğimiz tip, angle parantez içine alınır. Mapleyeceğimiz tip ise normal parantezin içinde yer alır.
         }
 
