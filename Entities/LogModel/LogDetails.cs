@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Entities.LogModel
 {
-    internal class LogDetails
+    public class LogDetails
     {
         public Object? ModelName { get; set; }
         public Object? Controller { get; set; }

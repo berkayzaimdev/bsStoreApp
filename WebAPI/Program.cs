@@ -24,8 +24,6 @@ builder.Services.AddControllers(config =>
 .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly)
 .AddNewtonsoftJson();
 
-builder.Services.AddScoped<ValidationFilterAttribute>(); // IoC
-
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
     options.SuppressModelStateInvalidFilter = true;
@@ -48,6 +46,8 @@ builder.Services.ConfigureLoggerService();
 
 builder.Services.AddAutoMapper(typeof(Program));
 // Tek satırda çağırabildiğimiz için extension olarak yazmaya gerek duymadık
+
+builder.Services.ConfigureActionFilters();
 
 var app = builder.Build();
 

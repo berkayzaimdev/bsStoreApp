@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Presentation.Controller
 {
+    [ServiceFilter(typeof(LogFilterAttribute))]
     [ApiController]
     [Route("api/books")]
     public class BooksController : ControllerBase
