@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NLog;
+using Presentation.ActionFilters;
 using Repositories.EFCore;
 using Services.Contracts;
 using WebAPI.Extensions;
@@ -22,6 +23,8 @@ builder.Services.AddControllers(config =>
 .AddXmlDataContractSerializerFormatters() // API'lerin response olarak XML formatında veri dönmesine izin verdik
 .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly)
 .AddNewtonsoftJson();
+
+builder.Services.AddScoped<ValidationFilterAttribute>(); // IoC
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
