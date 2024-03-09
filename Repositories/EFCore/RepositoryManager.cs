@@ -26,9 +26,9 @@ namespace Repositories.EFCore
         public IBookRepository Book => _bookRepository.Value;
         // Sadece kullanıldığı anda getirmek için Lazy Loading yaparak gereksiz kaynak kullanımını azalttık
 
-        public void Save()
+        public async Task SaveAsync()
         {
-            _context.SaveChanges();
+            _context.SaveChangesAsync();
         }
     }
 }
