@@ -1,6 +1,7 @@
 ﻿using Entities.Dtos;
 using Entities.Exceptions;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ActionFilters;
 using Services.Contracts;
@@ -25,9 +26,9 @@ namespace Presentation.Controller
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllBooksAsync()
+        public async Task<IActionResult> GetAllBooksAsync([FromQuery]BookParams bookParams)
         {
-            var books = await _manager.BookService.GetAllBooksAsync(false);
+            var books = await _manager.BookService.GetAllBooksAsync(bookParams, false);
             return Ok(books);
         }
 
