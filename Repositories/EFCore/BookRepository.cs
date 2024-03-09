@@ -20,6 +20,7 @@ namespace Repositories.EFCore
         {
             var books = await FindAll(trackChanges)
                 .FilterBooks(bookParams.MinPrice, bookParams.MaxPrice)
+                .Search(bookParams.SearchTerm)
                 .ToListAsync();
 
             return PagedList<Book>.ToPagedList(books, bookParams.PageNumber, bookParams.PageSize);

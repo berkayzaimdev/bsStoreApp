@@ -14,5 +14,11 @@ namespace Repositories.EFCore
             books.Where(book => 
             (book.Price) >= minPrice &&
             (book.Price) <= maxPrice);
+
+        public static IQueryable<Book> Search(this IQueryable<Book> books, string searchTerm)
+            =>
+            books.Where(book => book.Title
+            .ToLower()
+            .Contains(searchTerm.Trim().ToLower()));
     }
 }
