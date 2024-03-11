@@ -11,6 +11,7 @@ namespace WebAPI.Utilities.AutoMapper
             CreateMap<BookDtoForUpdate, Book>();
             CreateMap<Book, BookDto>(); // Book tipinden -> BookDto tipine mapleme yapabilmemiz için bu metodu yazdık. Az önce BookManager'da yaptığımız düzenlemeyi anlamlı kılmak için bunu yaptık
             CreateMap<BookDtoForInsertion, Book>();
+            CreateMap<UserForRegistrationDto, User>();
         }
     }
 }
