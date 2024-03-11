@@ -75,6 +75,9 @@ builder.Services.ConfigureRateLimitingOptions();
 
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
+
 builder.Services.AddScoped<IBookLinks, BookLinks>();
 
 var app = builder.Build();
@@ -101,7 +104,8 @@ app.UseCors("CorsPolicy");
 
 app.UseResponseCaching(); // Microsoft'un önerisi CORS'tan sonra kullanmak
 
-app.UseAuthorization();
+app.UseAuthentication(); // önce oturum açma
+app.UseAuthorization();  // sonra yetkilendirme
 
 app.MapControllers();
 
