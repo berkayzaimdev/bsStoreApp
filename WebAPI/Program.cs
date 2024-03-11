@@ -59,6 +59,9 @@ builder.Services.ConfigureDataShaper();
 builder.Services.AddCustomMediaTypes();
 // Özel dosya tiplerine izin verdiğimiz konfigürasyon
 
+builder.Services.ConfigureVersioning();
+// Versiyonlama için konfigürasyon
+
 builder.Services.AddScoped<IBookLinks, BookLinks>();
 
 var app = builder.Build();

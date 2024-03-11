@@ -80,5 +80,9 @@ namespace Services
 
             return entity;
         }
+        public async Task<List<Book>> GetAllBooksAsync(bool trackChanges)
+        {
+            return await _manager.Book.GetAllBooksAsync(trackChanges);
+        }
     }
 }
