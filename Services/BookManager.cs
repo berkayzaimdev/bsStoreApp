@@ -5,6 +5,7 @@ using Entities.Models;
 using Entities.RequestFeatures;
 using Repositories.Contracts;
 using Services.Contracts;
+using System.Dynamic;
 
 namespace Services
 {
@@ -13,14 +14,16 @@ namespace Services
         private readonly IRepositoryManager _manager;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
+        private readonly IDataShaper<BookDto> _shaper;
 
-        public BookManager(IRepositoryManager manager, ILoggerService logger, IMapper mapper)
+        public BookManager(IRepositoryManager manager, ILoggerService logger, IMapper mapper, IDataShaper<BookDto> shaper)
         {
             _manager = manager;
             _logger = logger;
             _mapper = mapper;
+            _shaper = shaper;
         }
-        public async Task<(IEnumerable<BookDto> books, MetaData metaData)> GetAllBooksAsync(BookParams bookParams, bool trackChanges)
+        public async Task<(IEnumerable<ExpandoObject> books, MetaData metaData)> GetAllBooksAsync(BookParams bookParams, bool trackChanges)
         {
             if (!bookParams.ValidPriceRange)
                 throw new PriceOutOfRangeBadRequestException();
@@ -28,7 +31,12 @@ namespace Services
             var booksWithMetaData = await _manager
                 .Book   
                 .GetAllBooksAsync(bookParams, trackChanges);
-            return (_mapper.Map<IEnumerable<BookDto>>(booksWithMetaData), booksWithMetaData.MetaData);
+
+            var booksDto = _mapper.Map<IEnumerable<BookDto>>(booksWithMetaData);
+
+            var shapedData = _shaper.ShapeData(booksDto, bookParams.Fields);
+
+            return (shapedData, booksWithMetaData.MetaData);
             // mapleme işleminde elde etmek istediğimiz tip, angle parantez içine alınır. Mapleyeceğimiz tip ise normal parantezin içinde yer alır.
         }
 

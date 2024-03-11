@@ -52,6 +52,8 @@ builder.Services.ConfigureActionFilters();
 builder.Services.ConfigureCors();
 // CORS konfigürasyonu
 
+builder.Services.ConfigureDataShaper();
+
 var app = builder.Build();
 
 var logger = app.Services.GetRequiredService<ILoggerService>();
