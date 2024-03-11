@@ -1,17 +1,10 @@
 ﻿using Entities.Dtos;
-using Entities.Exceptions;
-using Entities.Models;
 using Entities.RequestFeatures;
-using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ActionFilters;
 using Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Presentation.Controller
 {
@@ -30,6 +23,7 @@ namespace Presentation.Controller
             _manager = manager;
         }
 
+        [Authorize]
         // [HttpHead] // Header'dan veri döndürmek için bu notasyonu kullanabiliriz
         [HttpGet]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
