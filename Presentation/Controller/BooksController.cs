@@ -18,6 +18,7 @@ namespace Presentation.Controller
     [ServiceFilter(typeof(LogFilterAttribute))]
     [ApiController]
     [Route("api/{v:apiversion}/books")]
+    [ResponseCache(CacheProfileName = "5mins")]
     public class BooksController : ControllerBase
     {
         private readonly IServiceManager _manager;
@@ -30,6 +31,7 @@ namespace Presentation.Controller
         // [HttpHead] // Header'dan veri döndürmek için bu notasyonu kullanabiliriz
         [HttpGet]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
+        // [ResponseCache(Duration = 60)] // attribute olarak cache tanımlaması
         public async Task<IActionResult> GetAllBooksAsync([FromQuery]BookParams bookParams)
         {
             var linkParams = new LinkParams()

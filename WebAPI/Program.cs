@@ -18,6 +18,7 @@ builder.Services.AddControllers(config =>
     // API'leri content negotiation'a açık hale getirir. Default olarak bu seçenek false'tur.
     config.ReturnHttpNotAcceptable = true;
     // API'lerin response olarak 406 kodu dönmesine izin verir. Bu kod content negotiaton yapmaya çalıştığımızı, fakat başarısız olduğumuzu ifade eder.
+    config.CacheProfiles.Add("5mins", new CacheProfile() { Duration = 300 });
 }
 )
 .AddXmlDataContractSerializerFormatters() // API'lerin response olarak XML formatında veri dönmesine izin verdik
@@ -62,6 +63,9 @@ builder.Services.AddCustomMediaTypes();
 builder.Services.ConfigureVersioning();
 // Versiyonlama için konfigürasyon
 
+builder.Services.ConfigureResponseCaching();
+// Caching için konfigürsayon
+
 builder.Services.AddScoped<IBookLinks, BookLinks>();
 
 var app = builder.Build();
@@ -81,7 +85,13 @@ if (app.Environment.IsProduction())
     app.UseHsts();
 }
 app.UseHttpsRedirection();
+
 app.UseCors("CorsPolicy");
+
+app.UseResponseCaching(); // Microsoft'un önerisi CORS'tan sonra kullanmak
+
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();
