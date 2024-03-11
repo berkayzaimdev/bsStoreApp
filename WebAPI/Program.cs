@@ -66,6 +66,9 @@ builder.Services.ConfigureVersioning();
 builder.Services.ConfigureResponseCaching();
 // Caching için konfigürsayon
 
+builder.Services.ConfigureHttpCacheHeaders();
+// Marvin cache paketi için konfigürasyon
+
 builder.Services.AddScoped<IBookLinks, BookLinks>();
 
 var app = builder.Build();

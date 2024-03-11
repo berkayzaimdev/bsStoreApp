@@ -2,6 +2,7 @@
 using Entities.Exceptions;
 using Entities.Models;
 using Entities.RequestFeatures;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.ActionFilters;
 using Services.Contracts;
@@ -18,7 +19,8 @@ namespace Presentation.Controller
     [ServiceFilter(typeof(LogFilterAttribute))]
     [ApiController]
     [Route("api/{v:apiversion}/books")]
-    [ResponseCache(CacheProfileName = "5mins")]
+    // [ResponseCache(CacheProfileName = "5mins")]
+    // [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 80)] // Marvin cache paketi için özel attribute
     public class BooksController : ControllerBase
     {
         private readonly IServiceManager _manager;
