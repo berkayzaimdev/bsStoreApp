@@ -26,6 +26,7 @@ namespace Presentation.Controller
             _manager = manager;
         }
 
+        // [HttpHead] // Header'dan veri döndürmek için bu notasyonu kullanabiliriz
         [HttpGet]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetAllBooksAsync([FromQuery]BookParams bookParams)
@@ -103,6 +104,13 @@ namespace Presentation.Controller
             {
                 throw new Exception(exc.Message);
             }
+        }
+
+        [HttpOptions]
+        public IActionResult GetBooksOptions()
+        {
+            Response.Headers.Add("Allow", "GET, PUT, POST, PATCH, DELETE, HEAD, OPTIONS");
+            return NoContent();
         }
     }
 }
