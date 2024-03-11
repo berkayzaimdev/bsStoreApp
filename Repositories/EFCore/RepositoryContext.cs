@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using WebAPI.Repositories.Config;
 
 namespace Repositories.EFCore
 {
-    public class RepositoryContext : DbContext
+    public class RepositoryContext : IdentityDbContext<User> // IdentityDbContext, içerdiği tablolarıyla beraber DB'ye yansıtılır. Generic olarak User'ı yani kullanıcıyı tanımladık
     {
         public RepositoryContext(DbContextOptions options) : base(options)
         {
@@ -20,6 +21,7 @@ namespace Repositories.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder); // IdentityDbContext'e geçtiğimiz için bu sınıfın kalıtsal metodunu uygulamalıyız
             modelBuilder.ApplyConfiguration(new BookConfig()); // Data seeding method
         }
     }
