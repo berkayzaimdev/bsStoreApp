@@ -47,6 +47,7 @@ namespace Presentation.Controller
 
         }
 
+        [Authorize(Roles = "User, Editor, Admin")]
         [HttpGet("{id:int}")]
         public async Task<IActionResult> GetOneBookAsync([FromRoute(Name = "id")] int id)
         {
@@ -57,6 +58,7 @@ namespace Presentation.Controller
             return Ok(book);
         }
 
+        [Authorize(Roles = "Editor, Admin")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
         public async Task<IActionResult> CreateOneBookAsync([FromBody] BookDtoForInsertion bookDto)
