@@ -53,6 +53,10 @@ builder.Services.ConfigureCors();
 // CORS konfigürasyonu
 
 builder.Services.ConfigureDataShaper();
+// Data Shaper konfigürasyonu
+
+builder.Services.AddCustomMediaTypes();
+// Özel dosya tiplerine izin verdiğimiz konfigürasyon
 
 var app = builder.Build();
 
