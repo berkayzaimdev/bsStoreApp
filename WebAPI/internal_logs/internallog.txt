@@ -94,3 +94,27 @@
 2024-03-10 00:45:47.8751 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
 2024-03-10 00:45:47.8972 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\berka\source\repos\bsStoreApp\WebAPI\nlog.config
 2024-03-10 00:45:47.9313 Info Configuration initialized.
+2024-03-11 14:17:52.3470 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-03-11 14:17:52.3634 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-11 14:17:52.3703 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\BERKAY ZAIM\source\repos\berkayzaimdev\bsStoreApp\WebAPI\nlog.config
+2024-03-11 14:17:52.3703 Info Configuration initialized.
+2024-03-11 14:17:53.6841 Info AppDomain Shutting down. LogFactory closing...
+2024-03-11 14:17:53.6841 Info LogFactory has been closed.
+2024-03-11 14:18:30.1500 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-03-11 14:18:30.1500 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-11 14:18:30.1690 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\BERKAY ZAIM\source\repos\berkayzaimdev\bsStoreApp\WebAPI\nlog.config
+2024-03-11 14:18:30.1690 Info Configuration initialized.
+2024-03-11 14:18:32.0585 Info AppDomain Shutting down. LogFactory closing...
+2024-03-11 14:18:32.0585 Info LogFactory has been closed.
+2024-03-11 14:22:23.0157 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-03-11 14:22:23.0270 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-11 14:22:23.0270 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\BERKAY ZAIM\source\repos\berkayzaimdev\bsStoreApp\WebAPI\nlog.config
+2024-03-11 14:22:23.0419 Info Configuration initialized.
+2024-03-11 14:22:24.0623 Info AppDomain Shutting down. LogFactory closing...
+2024-03-11 14:22:24.0623 Info LogFactory has been closed.
+2024-03-11 14:22:34.0094 Info Registered target NLog.Targets.FileTarget(Name=logfile)
+2024-03-11 14:22:34.0210 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-03-11 14:22:34.0283 Info Validating config: TargetNames=logfile, ConfigItems=12, FilePath=C:\Users\BERKAY ZAIM\source\repos\berkayzaimdev\bsStoreApp\WebAPI\nlog.config
+2024-03-11 14:22:34.0283 Info Configuration initialized.
+2024-03-11 14:22:34.9502 Info AppDomain Shutting down. LogFactory closing...
+2024-03-11 14:22:34.9502 Info LogFactory has been closed.
