@@ -14,6 +14,7 @@ namespace Presentation.Controller
     [Route("api/{v:apiversion}/books")]
     // [ResponseCache(CacheProfileName = "5mins")]
     // [HttpCacheExpiration(CacheLocation = CacheLocation.Public, MaxAge = 80)] // Marvin cache paketi için özel attribute
+    [ApiExplorerSettings(GroupName = "v1")]
     public class BooksController : ControllerBase
     {
         private readonly IServiceManager _manager;

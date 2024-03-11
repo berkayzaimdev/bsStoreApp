@@ -14,6 +14,7 @@ namespace Presentation.Controller
     // [ApiVersion("2.0", Deprecated = true)] // Deprecated kullanımı ile API'yi devreden çıkarabiliriz.
     [ApiController]
     [Route("api/{v:apiversion}/books")]
+    [ApiExplorerSettings(GroupName = "v2")]
     public class BooksV2Controller : ControllerBase
     {
         private readonly IServiceManager _manager;
