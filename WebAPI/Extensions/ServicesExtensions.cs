@@ -1,4 +1,5 @@
-﻿using Entities.Dtos;
+﻿using AspNetCoreRateLimit;
+using Entities.Dtos;
 using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -100,5 +101,27 @@ namespace WebAPI.Extensions
             {
                 validationOpt.MustRevalidate = false;
             });
+        public static void ConfigureRateLimitingOptions(this IServiceCollection services)
+        {
+            var rateLimitRules = new List<RateLimitRule>() // Kural listesi
+            {
+                new RateLimitRule() // koşulları sağlamazsa TooManyRequest dön
+                {
+                    Endpoint = "*", // tamamını kapsa
+                    Limit = 3, // 1 dakikada 3 istek alabiliriz
+                    Period = "1m" // 1 dakika
+                }
+            };
+
+            services.Configure<IpRateLimitOptions>(opt =>
+            {
+                opt.GeneralRules = rateLimitRules;
+            });
+
+            services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>(); // Bir kez oluşturulması yeterli, ezberlememize gerek yok ihtiyaç halinde kullanabiliriz
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+        }
     }
 }

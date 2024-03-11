@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreRateLimit;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NLog;
 using Presentation.ActionFilters;
@@ -69,6 +70,11 @@ builder.Services.ConfigureResponseCaching();
 builder.Services.ConfigureHttpCacheHeaders();
 // Marvin cache paketi için konfigürasyon
 
+builder.Services.ConfigureRateLimitingOptions();
+// Hız sınırlama için konfigürasyon
+
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<IBookLinks, BookLinks>();
 
 var app = builder.Build();
@@ -88,6 +94,8 @@ if (app.Environment.IsProduction())
     app.UseHsts();
 }
 app.UseHttpsRedirection();
+
+app.UseIpRateLimiting();
 
 app.UseCors("CorsPolicy");
 
