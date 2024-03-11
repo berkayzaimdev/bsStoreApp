@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.Dtos;
 using Entities.Exceptions;
+using Entities.LinkModels;
 using Entities.Models;
 using Entities.RequestFeatures;
 using Repositories.Contracts;
@@ -14,29 +15,30 @@ namespace Services
         private readonly IRepositoryManager _manager;
         private readonly ILoggerService _logger;
         private readonly IMapper _mapper;
-        private readonly IDataShaper<BookDto> _shaper;
+        private readonly IBookLinks _bookLinks;
 
-        public BookManager(IRepositoryManager manager, ILoggerService logger, IMapper mapper, IDataShaper<BookDto> shaper)
+        public BookManager(IRepositoryManager manager, ILoggerService logger, IMapper mapper, IBookLinks bookLinks)
         {
             _manager = manager;
             _logger = logger;
             _mapper = mapper;
-            _shaper = shaper;
+            _bookLinks = bookLinks;
         }
-        public async Task<(IEnumerable<ExpandoObject> books, MetaData metaData)> GetAllBooksAsync(BookParams bookParams, bool trackChanges)
+        public async Task<(LinkResponse linkResponse, MetaData metaData)> GetAllBooksAsync(LinkParams linkParams, bool trackChanges)
         {
-            if (!bookParams.ValidPriceRange)
+            if (!linkParams.BookParams.ValidPriceRange)
                 throw new PriceOutOfRangeBadRequestException();
 
             var booksWithMetaData = await _manager
                 .Book   
-                .GetAllBooksAsync(bookParams, trackChanges);
+                .GetAllBooksAsync(linkParams.BookParams, trackChanges);
 
             var booksDto = _mapper.Map<IEnumerable<BookDto>>(booksWithMetaData);
 
-            var shapedData = _shaper.ShapeData(booksDto, bookParams.Fields);
+            var links = _bookLinks.TryGenerateLink(booksDto, linkParams.BookParams.Fields, linkParams.HttpContext);
 
-            return (shapedData, booksWithMetaData.MetaData);
+
+            return (linkResponse : links, metaData : booksWithMetaData.MetaData);
             // mapleme işleminde elde etmek istediğimiz tip, angle parantez içine alınır. Mapleyeceğimiz tip ise normal parantezin içinde yer alır.
         }
 
