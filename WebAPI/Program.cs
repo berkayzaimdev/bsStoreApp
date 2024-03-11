@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 LogManager.LoadConfiguration(String.Concat(Directory.GetCurrentDirectory(),"/nlog.config"));
 
-builder.Services.AddControllers(config =>    
+builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;
     // API'leri content negotiation'a açık hale getirir. Default olarak bu seçenek false'tur.
@@ -20,10 +20,10 @@ builder.Services.AddControllers(config =>
     // API'lerin response olarak 406 kodu dönmesine izin verir. Bu kod content negotiaton yapmaya çalıştığımızı, fakat başarısız olduğumuzu ifade eder.
 }
 )
-.AddCustomCsvFormatter()
 .AddXmlDataContractSerializerFormatters() // API'lerin response olarak XML formatında veri dönmesine izin verdik
-.AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly)
-.AddNewtonsoftJson();
+.AddCustomCsvFormatter()
+.AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
+//.AddNewtonsoftJson();
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {

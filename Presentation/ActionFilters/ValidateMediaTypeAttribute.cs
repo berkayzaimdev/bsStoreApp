@@ -21,12 +21,11 @@ namespace Presentation.ActionFilters
             }
 
             var mediaType = context.HttpContext
-                .Response
+                .Request
                 .Headers["Accept"]
                 .FirstOrDefault();
-            // yanıt başarılı bir şekilde verildiyse
 
-            if(MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue? outMediaType))
+            if (!MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue? outMediaType))
             {
                 // yanıt header'ında mediatype geçersiz bir değer ise
                 context.Result = new BadRequestObjectResult($"Accept header is missing. " +
